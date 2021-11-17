@@ -1,0 +1,29 @@
+.container{
+  padding: 0;
+}
+
+.header{
+  width: 100%;
+  padding: 5px;
+  background-color: blue;
+  display: flex;
+  align-items: center;
+}
+
+.header h3{
+  width: 100%;
+  text-align: center;
+}
+
+.card-info{
+  margin-top: 20px;
+  padding: 10px;
+  color: gray;
+}
+
+
+.content{
+  padding: 10px;
+  width: 100%;
+  position: relative;
+}

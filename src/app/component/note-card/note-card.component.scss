@@ -1,0 +1,70 @@
+
+.card-list{
+  padding: 10px;
+  text-align: justify;
+  width: 100%;
+  position: relative;
+}
+
+.card-list .card{
+  position: relative;
+  width: 100%;
+  padding: 5px;
+  margin:0 auto ;
+  background-color: rgb(206, 203, 203);
+
+  .card-title{
+    padding: 5px;
+    width: 100%;
+    position: relative;
+    text-align: center;
+    background-color: white;
+    margin-top:8px;
+  }
+
+  .card-footer{
+    padding: 7px;
+    position: relative;
+    width: 100%;
+    margin-top: 8px;
+    display: flex;
+    justify-content: space-evenly;
+
+    .info-footer{
+      padding: 5px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    ion-icon{
+      font-size: 20px;
+    }
+
+  }
+
+  .card-header{
+    width: 100%;
+    padding: 4px;
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid rgb(215, 238, 252 , 0.5);
+  }
+
+  .card-body{
+    padding: 5px;
+  }
+
+  .card-span{
+    width: 100%;
+    display: flex;
+    margin-top: 5px;
+    justify-content: flex-end;
+
+    em{
+      color: red;
+      padding:0 2px;
+    }
+  }
+
+}

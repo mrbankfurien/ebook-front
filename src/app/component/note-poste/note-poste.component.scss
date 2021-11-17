@@ -1,0 +1,148 @@
+.card-list{
+  padding: 10px;
+  text-align: justify;
+  width: 100%;
+  position: relative;
+}
+
+.card-list .post-card{
+  position: relative;
+  width: 100%;
+  padding: 5px;
+  margin: 8px auto ;
+  background-color: rgb(206, 203, 203);
+
+  .post-card-title{
+    background-color: white;
+    color: blue;
+    padding: 5px;
+    margin-top:5px;
+    text-align: center;
+  }
+
+  .post-card-header{
+    width: 100%;
+    padding: 4px;
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid rgb(215, 238, 252 , 0.5);
+
+    .describle{
+      padding: 3px;
+      display: flex;
+      background-color: white;
+      align-content: baseline;
+
+      ion-icon{
+        position: relative;
+        bottom: -3px;
+      }
+    }
+  }
+
+  .post-status{
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+
+    span{
+      color: white;
+    }
+
+    em{
+      padding: 4px;
+      color: green;
+      font-weight: bolder;
+
+      ion-icon{
+        position: relative;
+        bottom: -3px;
+      }
+    }
+  }
+
+  .post-card-body{
+    padding: 5px;
+  }
+
+  .post-card-span{
+    width: 100%;
+    display: flex;
+    margin-top: 8px;
+    justify-content: space-evenly;
+
+    .post-span-content{
+      padding: 0;
+      text-align: center;
+
+      ion-icon{
+        position: relative;
+        top:3px;
+        padding-left: 2px;
+      }
+    }
+
+    em{
+      color: red;
+      padding:2px;
+    }
+  }
+
+}
+
+
+.card-info{
+  margin-top: 20px;
+  padding: 10px;
+  color: gray;
+}
+
+.over-option{
+  position:fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  padding: 10px;
+  background-color: rgba(0,0,0, 0.3);
+  z-index: 999999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 300ms ease-in-out;
+
+  .card{
+    background-color: white;
+    position: relative;
+    width: 100%;
+
+    .card-header{
+      padding: 5px;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      border-bottom: 1px solid black;
+    }
+
+    .option-list{
+      padding: 5px;
+      margin: 4px auto;
+      width: 100%;
+
+      ul{
+        display: block;
+
+        li{
+          padding: 3px;
+          border-bottom: 1px solid rgba(0,0,0, 0.4);
+          font-size: 18px;
+        }
+
+        li:last-child{
+          border-bottom: none;
+        }
+      }
+    }
+
+  }
+}

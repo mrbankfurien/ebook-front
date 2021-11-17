@@ -1,0 +1,53 @@
+<div class="card-list">
+  <div class="post-card">
+    <div class="post-card-header">
+      <span class="pseudo">@{{ pseudo }}</span>
+      <div class="describle">
+        <span class="post-post-hours"> {{ addDate }} <ion-icon (click)="openOption()" name="ellipsis-horizontal-outline"></ion-icon></span>
+      </div>
+    </div>
+    <div class="post-card-title">{{ title }}</div>
+    <div class="post-card-body">
+      {{ msg }}
+    </div>
+    <div class="post-status">
+      <span>Status : </span>
+      <em>
+        <ion-icon name="globe-outline"></ion-icon> {{ visibility }}
+      </em>
+    </div>
+    <div class="post-card-span">
+      <div class="post-span-content">
+        {{ likedNumber }}<ion-icon (click)="liked(1)" [color]="color" name="heart"></ion-icon>
+      </div>
+      <div class="post-span-content">
+        {{ dislikedNumber }}<ion-icon (click)="liked(0)" [color]="disliked" name="heart-dislike"></ion-icon>
+      </div>
+      <div [routerLink]="['/comment-poster/'+idPoste]" class="post-span-content">
+        {{ commentNumber }}<ion-icon name="chatbubbles"></ion-icon>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div (click)="closedOption()" *ngIf="over" class="over-option">
+
+  <div class="card">
+
+    <div class="card-header">
+      <span>Option</span>
+      <span>
+        <ion-icon name="close-circle-outline"></ion-icon>
+      </span>
+    </div>
+
+    <div class="option-list">
+      <ul>
+        <li [routerLink]="['/update-note/'+idPoste ]"> Modifier</li>
+        <li (click)="deleted()" > Supprimer </li>
+      </ul>
+    </div>
+
+  </div>
+
+</div>

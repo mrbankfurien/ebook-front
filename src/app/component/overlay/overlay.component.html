@@ -1,0 +1,6 @@
+<div (click)="closed()" [ngClass]="{'sending' : status , 'overLay' : true }">
+  <div class="card-overlay">
+    <img src="../../../assets/img/loader.svg" alt="..."/>
+    {{ content }}
+  </div>
+</div>

@@ -1,0 +1,51 @@
+<div class="container">
+
+  <div class="header">
+    <h3>Banks Ebook</h3>
+    <span (click)="logOut()"><ion-icon name="log-out-outline"></ion-icon></span>
+  </div>
+
+  <div class="content-body">
+
+    <div class="describe">
+      <div class="card-img">
+        <img src="../../assets/img/icon.png" alt="icon...">
+      </div>
+      <div class="info">
+        <span class="name">Pseudonyme : @{{ userInfo.pseudo }} </span>
+        <span class="date">Date d'adhesion : 2021-10-28 10:07:53.</span>
+      </div>
+    </div>
+
+    <div class="personal-note">
+      <strong> Mes Notes Personelles .</strong>
+      <span (click)="navToActu()"> <em>Actualité</em> <ion-icon name="arrow-forward-outline"></ion-icon> </span>
+    </div>
+
+    <div class="poster-section">
+      <span *ngIf="counter===0" class="counter">Aunce note enregistré en votre nom .</span>
+    </div>
+
+      <app-note-card
+      *ngFor="let item of poste"
+      [pseudo]=userInfo.pseudo
+      [date]=item.addDate
+      [content]=item.msg
+      [condition]="item.status==='Oui'"
+      [otherDate]=item.delais
+      [unite]=item.unite
+      [idPoste]=item.id
+      [title]=item.title
+      ></app-note-card>
+
+  </div>
+
+</div>
+
+<div class="btn-float">
+  <ion-fab [routerLink]="['/edit-note']" vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button>
+      <ion-icon name="create-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</div>

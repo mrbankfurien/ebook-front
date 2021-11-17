@@ -1,0 +1,47 @@
+<div class="container">
+
+  <div class="header">
+      <ion-icon [routerLink]="['/']" name="chevron-back-outline"></ion-icon>
+      <h3>CONNEXION</h3>
+  </div>
+
+  <div class="content">
+
+    <div class="img-bg">
+      <img src="../assets/img/bg-register.jpg" alt="..."/>
+    </div>
+
+    <div class="form-card">
+      <form [formGroup]="loginForm">
+        <div class="input-card">
+          <label for="username"> Email * </label>
+          <input formControlName="email" type="text" placeholder="bankfurienn@gmail.com">
+          <em *ngIf="!loginForm.controls.email.valid || !emailError.status">{{ emailError.msg }}</em>
+        </div>
+
+        <div class="input-card">
+          <label for="username"> Mot de passe *</label>
+          <input formControlName="passwords" type="password" placeholder="**********">
+          <em *ngIf="!loginForm.controls.passwords.valid || !passwordsError.status">{{ passwordsError.msg }}</em>
+        </div>
+      </form>
+    </div>
+
+    <div [routerLink]="['/restort']" class="reset-account">
+      <span>Mot de passe Oublié ?</span>
+    </div>
+
+    <div (click)="login()" class="login-btn">
+      <ion-icon name="log-in-outline"></ion-icon>
+      <span> Se Connecter à Banks ebook </span>
+    </div>
+
+    <div [routerLink]="['/register']" class="create-account">
+      <span>Vous n'avez pas de compte ?</span>
+    </div>
+
+  </div>
+
+  <app-overlay [status]=formIsValid content="Connection en cours..."></app-overlay>
+
+</div>

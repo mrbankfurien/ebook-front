@@ -1,0 +1,41 @@
+<div class="container">
+
+  <div [routerLink]="['/login']" class="header">
+    <ion-icon name="chevron-back-outline"></ion-icon>
+    <h3>REINITIALISATION</h3>
+  </div>
+
+  <div class="content">
+
+    <p>
+      Vous avez oublié vos identifiants d'accés ? pas de panique , veuillez renseigner votre addresse email  et nous procederons à la restauration de votre compte *
+    </p>
+
+    <div class="img-bg">
+      <img src="../assets/img/restart.jpg" alt="..."/>
+    </div>
+
+    <div class="form-card">
+      <form [formGroup]="resetFrom">
+        <div class="input-card">
+          <label for="username"> Email * </label>
+          <input formControlName="email" type="text" placeholder="bankfurienn@gmail.com">
+          <em  *ngIf="!resetFrom.controls.email.valid || !emailError.status">{{ emailError.msg }}</em>
+        </div>
+      </form>
+    </div>
+
+    <div (click)="lauchReset()" class="login-btn">
+      <ion-icon name="refresh-outline"></ion-icon>
+      <span> Demarer la réinitialisation </span>
+    </div>
+
+    <div [routerLink]="['/login']" class="create-account">
+      <span> Se connecter </span>
+    </div>
+
+  </div>
+
+  <app-overlay [status]=formIsValid content="Patientez un instant..."></app-overlay>
+
+</div>

@@ -1,0 +1,71 @@
+<div class="container">
+
+  <div class="header">
+    <ion-icon [routerLink]="['/']" name="chevron-back-outline"></ion-icon>
+    <h3>FIL D'ACTU</h3>
+  </div>
+
+  <div class="content-body">
+
+    <div class="card-slide">
+
+    </div>
+
+    <div *ngIf="counter===0" class="card-info">
+      Aucune information disponible pour l'instant ...
+    </div>
+
+    <div class="card-list">
+      <div *ngFor="let item of arrayPoster" class="post-card">
+        <div class="post-card-header">
+          <span class="pseudo">@{{ item.pseudonyme }}</span>
+          <div class="describle">
+            <span class="post-post-hours"> {{ item.addDate }} <ion-icon *ngIf="userStatus" (click)="openOption()" name="ellipsis-horizontal-outline"></ion-icon></span>
+          </div>
+        </div>
+        <div class="post-card-title">{{ item.title }}</div>
+        <div class="post-card-body">
+          {{ item.msg }}
+        </div>
+        <div class="post-status">
+          <span>Status : </span>
+          <em>
+            <ion-icon name="globe-outline"></ion-icon> {{ item.visibility }}
+          </em>
+        </div>
+        <div *ngIf="userStatus" class="post-card-span">
+          <ion-icon name="heart"></ion-icon>
+          <ion-icon name="heart-dislike"></ion-icon>
+          <ion-icon name="chatbubbles"></ion-icon>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div (click)="closedOption()" *ngIf="over" class="over-option">
+
+    <div class="card">
+
+      <div class="card-header">
+        <span>Option</span>
+        <span>
+          <ion-icon name="close-circle-outline"></ion-icon>
+        </span>
+      </div>
+
+      <div class="option-list">
+        <ul>
+          <li>data</li>
+          <li>data</li>
+          <li>data</li>
+          <li>data</li>
+          <li>data</li>
+        </ul>
+      </div>
+
+    </div>
+
+  </div>
+
+</div>

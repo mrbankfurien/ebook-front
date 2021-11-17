@@ -1,0 +1,69 @@
+
+.errorContent{
+  position:absolute;
+  top: 0;
+  left: 0;
+  padding:10px;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0, 0.3);
+  z-index: 999999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 300ms ease-in-out;
+  /* transform: scale(0);
+  opacity: 0; */
+}
+
+/* .errorContent.sending{
+  opacity: 1;
+  transform: scale(1);
+} */
+
+.card-errorContent{
+  width: 100%;
+  background-color: white;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+}
+
+.card-errorContent .header{
+  position: relative;
+  width: 100%;
+  background-color: red;
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
+  color: white;
+  font-weight: bolder;
+}
+
+.card-errorContent .header h4{
+  padding-left: 5px;
+}
+
+.card-errorContent .content{
+  padding: 10px;
+}
+
+.footer-btn{
+  position: relative;
+  width: 100%;
+  display: flex;
+  padding: 5px;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(219, 219, 218);
+  height: 40px;
+  color: black;
+  gap: 5px;
+  margin-top: 13px;
+}
+
+.arrow{
+  color: black;
+  font-weight: bolder;
+  font-size: 20px;
+}

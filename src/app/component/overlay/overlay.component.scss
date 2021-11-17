@@ -1,0 +1,36 @@
+.overLay{
+  position:absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  padding: 10px;
+  background-color: rgba(0,0,0, 0.3);
+  z-index: 999999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 300ms ease-in-out;
+  transform: scale(0);
+  opacity: 0;
+}
+
+.overLay.sending{
+  opacity: 1;
+  transform: scale(1);
+}
+
+.card-overlay{
+  width: 100%;
+  background-color: white;
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.card-overlay img{
+  position: relative;
+  width: 100px;
+  height: 100px;
+}

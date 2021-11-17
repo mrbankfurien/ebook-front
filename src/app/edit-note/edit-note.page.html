@@ -1,0 +1,78 @@
+<div class="container">
+
+  <div class="header">
+      <ion-icon [routerLink]="['/dashboard']" name="chevron-back-outline"></ion-icon>
+      <h3> RAPPELLE / POSTE </h3>
+  </div>
+
+  <div class="content">
+
+    <div class="card-img">
+      <img src="../../assets/img/write.jpg" alt="image...">
+    </div>
+
+    <div class="title">
+      Bienvenue à vous 💞🥰, notez vos differents rappels , planifier votre agenda ,
+      dites nous quelques choses ...
+    </div>
+
+    <div class="card-form">
+      <form [formGroup]="formCreate">
+        <div class="cart-input">
+          <label> Titre </label>
+          <input formControlName="title" type="text" placeholder="Visite Technique">
+        </div>
+        <div class="cart-input">
+          <label> Contenu </label>
+          <textarea formControlName="content" placeholder="Je dois faire ma visite technique, afin d'eviter les contrôles de la police routière ..."></textarea>
+        </div>
+        <div class="cart-input">
+          Type de Visibilité
+          <ion-item>
+            <ion-label><em>cliquer pour modifier</em></ion-label>
+            <ion-select formControlName="visibility" (ionChange)="changeVisibility()" interface="popover">
+              <ion-select-option value="Privé">Privé</ion-select-option>
+              <ion-select-option value="Public">Public</ion-select-option>
+            </ion-select>
+          </ion-item>
+        </div>
+        <div *ngIf="visibility" class="cart-input">
+          Status du rappelle
+          <ion-item>
+            <ion-label><em>cliquer pour modifier</em></ion-label>
+            <ion-select formControlName="status" (ionChange)="changeStatus()" interface="popover">
+              <ion-select-option value="Non">Non</ion-select-option>
+              <ion-select-option value="Oui">Oui</ion-select-option>
+            </ion-select>
+          </ion-item>
+        </div>
+        <div *ngIf="status && visibility" class="cart-input">
+          Unite de rappelle
+          <ion-item>
+            <ion-label><em>cliquer pour modifier</em></ion-label>
+            <ion-select formControlName="unite" interface="popover">
+              <ion-select-option value="Année">Année</ion-select-option>
+              <ion-select-option value="Mois">Mois</ion-select-option>
+              <ion-select-option value="Jour">Jour</ion-select-option>
+              <ion-select-option value="Heure">Heure</ion-select-option>
+              <ion-select-option value="Minute">Minute</ion-select-option>
+            </ion-select>
+          </ion-item>
+        </div>
+        <div *ngIf="status && visibility" class="cart-input">
+          <label> Delais <em class="info"> en fonction de l'unité choisir ( chiffre en nombre ) </em> </label>
+          <input formControlName="delais" type="number" placeholder="1 ou 2 , 3 , 9 , ...">
+        </div>
+      </form>
+
+      <div class="btn-send">
+        <button (click)="savePoster()">
+          <ion-icon name="cloud-done-outline"></ion-icon> Sauvegarder
+        </button>
+      </div>
+    </div>
+
+  </div>
+
+
+</div>

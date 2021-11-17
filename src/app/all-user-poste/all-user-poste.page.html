@@ -1,0 +1,31 @@
+<div class="container">
+
+  <div class="header">
+    <ion-icon [routerLink]="['/dashboard']" name="chevron-back-outline"></ion-icon>
+    <h3> FIL D'ACTU </h3>
+  </div>
+
+  <div class="content">
+
+    <div *ngIf="counter===0" class="card-info">
+      Aucune information disponible pour l'instant ...
+    </div>
+
+    <app-note-poste
+   *ngFor='let item of poste'
+   [pseudo]=item.pseudonyme
+   [addDate]=item.addDate
+   [msg]=item.msg
+   [title]=item.title
+   [color]="item.loved_counter===1 ? 'danger' : 'light' "
+   [disliked]="item.disloved_counter===1 ? 'warning' : 'dark' "
+   [visibility]=item.visibility
+   [idPoste]=item.id
+   [likedNumber]=item.likers_counters
+   [dislikedNumber]=item.dislikers_counters
+   [commentNumber]=item.comment_counters
+   ></app-note-poste>
+
+  </div>
+
+</div>

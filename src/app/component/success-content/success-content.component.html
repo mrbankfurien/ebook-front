@@ -1,0 +1,15 @@
+<div [ngClass]="{'successContent': true , 'validate': status}" >
+  <div class="card-successContent">
+      <div class="header">
+        <ion-icon name="checkmark-done-outline"></ion-icon>
+        <h4> {{ title }} </h4>
+      </div>
+      <div class="content">
+        {{ content }}
+      </div>
+      <div (click)="closed()" class="footer-btn">
+        <ion-icon class="arrow" name="arrow-back-outline"></ion-icon>
+        <span> Quitter </span>
+      </div>
+  </div>
+</div>

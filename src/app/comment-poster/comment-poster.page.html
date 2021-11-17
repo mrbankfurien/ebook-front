@@ -1,0 +1,36 @@
+<div class="container">
+
+  <div class="headers">
+    <ion-icon (click)="goBack()" name="chevron-back-outline"></ion-icon>
+    <h3> COMMENTAIRES </h3>
+  </div>
+
+  <div *ngIf="counters===0" class="card-info">
+    Soyer le premier à commenter ce poste ...
+  </div>
+
+  <div class="comment-content">
+    <div *ngFor="let item of commentAll" class="content">
+      <div class="header">
+        <span>@{{ item.pseudonyme }}</span>
+        <span> {{ item.add_date }}</span>
+      </div>
+      {{ item.msg }}
+    </div>
+  </div>
+
+
+  <div class="card-write">
+    <form [formGroup]="formComment">
+    <div class="card">
+        <div class="card-input">
+          <input formControlName="message" type="text">
+        </div>
+        <div *ngIf="formComment.valid" (click)="sendComment()" class="icon-send">
+          <ion-icon  name="paper-plane-outline"></ion-icon>
+        </div>
+      </div>
+    </form>
+  </div>
+
+</div>

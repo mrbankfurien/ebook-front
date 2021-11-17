@@ -1,0 +1,27 @@
+<div class="card-list">
+  <div class="card">
+    <div class="card-header">
+      <span class="pseudo">@ {{ pseudo }}</span>
+      <span class="post-hours"> {{ date }} </span>
+    </div>
+    <div class="card-title">
+      {{ title }}
+    </div>
+    <div class="card-body">
+      {{ content }}
+    </div>
+    <div *ngIf="condition" class="card-span">
+      Rappelle dans : <em> {{ otherDate }} {{ unite }}</em>
+    </div>
+    <div class="card-footer">
+      <div [routerLink]="['/update-note/'+idPoste]" class="info-footer">
+        <ion-icon name="pencil-outline"></ion-icon>
+        Modifier
+      </div>
+      <div (click)="deleted()" class="info-footer">
+        <ion-icon name="trash-outline"></ion-icon>
+        Supprimer
+      </div>
+    </div>
+  </div>
+</div>
