@@ -5,6 +5,7 @@ import { Subject } from 'rxjs';
 import { Router } from '@angular/router';
 import { OtherFunction } from '../other/toast';
 import { UserService } from './user.service';
+import { links } from '../link/links';
 
 @Injectable({
   providedIn: 'root'
@@ -32,7 +33,7 @@ export class PosterService {
   public getAllPoste(userId: number)
   {
 
-      this.http.get('http://localhost:3080/api/poster/all-post/' + userId).subscribe(
+      this.http.get(links.privatePost.post + userId).subscribe(
         (response: any)=>{
 
           if(response.status)
@@ -56,7 +57,7 @@ export class PosterService {
   public createPoste(poste: Poster)
   {
     return new Promise((resolve,reject)=>{
-      this.http.post('http://localhost:3080/api/poster/save-post',poste).subscribe(
+      this.http.post(links.privatePost.create,poste).subscribe(
         (response)=>{
           this.getAllPoste(this.userId);
           resolve(response);
@@ -71,7 +72,7 @@ export class PosterService {
   public getOnPoste(id: number)
   {
     return new Promise((resolve,reject)=>{
-      this.http.get('http://localhost:3080/api/poster/getOnPost/'+id).subscribe(
+      this.http.get(links.privatePost.onPost+id).subscribe(
         (response: any)=>{
           resolve(response.message[0]);
         } ,
@@ -86,7 +87,7 @@ export class PosterService {
   {
     return new Promise((resolve,reject)=>{
 
-      this.http.put('http://localhost:3080/api/poster/update-post/'+id,poste).subscribe(
+      this.http.put(links.privatePost.update+id,poste).subscribe(
         (response)=> {
           this.getAllPoste(this.userId);
           resolve(response);
@@ -100,7 +101,7 @@ export class PosterService {
 
   public deletedPost(id: number) {
     return new Promise((resolve, reject) => {
-      this.http.delete('http://localhost:3080/api/poster/deleted/' + id).subscribe(
+      this.http.delete(links.privatePost.delete + id).subscribe(
         (response) => {
           this.getAllPoste(this.userId);
           resolve(response);

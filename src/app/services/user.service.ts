@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http' ;
 import { User } from '../models/user.model';
 import { BehaviorSubject } from 'rxjs';
+import { links } from '../link/links';
 
 @Injectable({
   providedIn: 'root'
@@ -21,7 +22,7 @@ export class UserService {
 
   public createNewUser(user: User){
     return new Promise((resolve , reject) =>{
-      this.http.post('http://localhost:3080/api/user/signup',user).
+      this.http.post(links.usersLink.register,user).
       subscribe(
         (response) =>{
           resolve(response) ;
@@ -36,7 +37,7 @@ export class UserService {
   public userLogin(mail: string , password: string)
   {
     return new Promise((resolve , reject)=>{
-      this.http.post('http://localhost:3080/api/user/login',{email: mail , passwords: password}).
+      this.http.post(links.usersLink.login,{email: mail , passwords: password}).
       subscribe(
         (response: any) =>{
             if(response.status)
@@ -62,7 +63,7 @@ export class UserService {
   public resetPassword(mail: string){
     return new Promise((resolve , reject)=>{
 
-      this.http.post('http://localhost:3080/api/user/reset-password',{email: mail}).subscribe(
+      this.http.post(links.usersLink.reset,{email: mail}).subscribe(
         (response)=>{
             resolve(response) ;
         } ,

@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { UserService } from './user.service';
 import { Poster } from '../models/poster.model';
 import { CommentPoster } from '../models/comment.model';
+import { links } from '../link/links';
 
 @Injectable({
   providedIn: 'root'
@@ -34,7 +35,7 @@ export class PublicPosterService {
 
   public posteComment(comment: CommentPoster) {
     return new Promise((resolve,reject)=>{
-        this.http.post('http://localhost:3080/api/public-poster/comment-poster/',comment).subscribe(
+        this.http.post(links.publicPost.commented,comment).subscribe(
           (response)=>{
             resolve(response);
           } ,
@@ -46,7 +47,7 @@ export class PublicPosterService {
   }
 
   public allComment(id: number){
-    this.http.get('http://localhost:3080/api/public-poster/current-comment-poste/'+id).subscribe(
+    this.http.get(links.publicPost.allComment+id).subscribe(
       (response)=>{
         this.commentForPoster = response ;
         this.emitComment();
@@ -78,7 +79,7 @@ export class PublicPosterService {
   public lovedPoster(id: number , data: any){
     return new Promise((resolve,reject)=>{
 
-      this.http.put('http://localhost:3080/api/public-poster/loved-poster/'+id,data).subscribe(
+      this.http.put(links.publicPost.lovePost+id,data).subscribe(
         (response) =>{
             resolve(response);
         },
@@ -93,7 +94,7 @@ export class PublicPosterService {
   {
     return new Promise((resolve,reject)=>{
 
-      this.http.put('http://localhost:3080/api/poster/update-post/'+id,poste).subscribe(
+      this.http.put(links.publicPost.updatePost+id,poste).subscribe(
         (response)=> {
           this.allPrivatePoster(this.userId);
           resolve(response);
@@ -107,7 +108,7 @@ export class PublicPosterService {
 
   public allPoster()
   {
-      this.http.get('http://localhost:3080/api/public-poster/all-poster/').subscribe(
+      this.http.get(links.publicPost.allPost).subscribe(
         (response)=>{
           this.publicPoster = response ;
           this.emitPublicPoster();
@@ -120,7 +121,7 @@ export class PublicPosterService {
 
   public allUserPublicPoster(userId: number)
   {
-      this.http.get('http://localhost:3080/api/public-poster/members-poster/'+userId).subscribe(
+      this.http.get(links.publicPost.publicPost+userId).subscribe(
         (response)=>{
           this.publicUserPoster = response ;
           this.emitPublicUserPoster();
@@ -133,7 +134,7 @@ export class PublicPosterService {
 
   public allPrivatePoster(userId: number)
   {
-      this.http.get('http://localhost:3080/api/public-poster/user-poster/' + userId).subscribe(
+      this.http.get(links.publicPost.privatePost + userId).subscribe(
         (response)=>{
           this.privatePoster = response ;
           this.emitPrivatePoster();
@@ -146,7 +147,7 @@ export class PublicPosterService {
 
   public deletedPost(id: number) {
     return new Promise((resolve, reject) => {
-      this.http.delete('http://localhost:3080/api/poster/deleted/' + id).subscribe(
+      this.http.delete(links.publicPost.deletePost + id).subscribe(
         (response) => {
           this.allPrivatePoster(this.userId);
           resolve(response);
