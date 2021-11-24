@@ -1,7 +1,6 @@
 import { Component, OnInit , OnDestroy } from '@angular/core';
 import { PublicPosterService } from '../services/public-post.service';
 import { Subscription , interval } from 'rxjs';
-import { Poster } from '../models/poster.model';
 import { UserService } from '../services/user.service';
 import { Router } from '@angular/router';
 import { StateService } from '../services/state.service';
@@ -25,34 +24,37 @@ export class AllUserPostePage implements OnInit  ,  OnDestroy{
     private router: Router,
     private serviceState: StateService) { }
 
-  ngOnInit() {
+
+    ngOnInit() {
+      this.serviceState.mode$.next('allPosterPart') ;
+      this.userId = this.userService.userId ? this.userService.userId : 0 ;
+      this.posteService.allUserPublicPoster(this.userId);
+      this.posteSub = this.posteService.allUserPoster$.subscribe(
+        (response: any)=>{
+          this.poste = response.message ;
+          this.counter = response.counters;
+        }
+      ) ;
+      this.intervalCounter = interval(5000) ;
+      this.countersSub = this.intervalCounter.subscribe(
+        ()=>{
+          this.posteService.allUserPublicPoster(this.userId);
+        }
+      );
+    }
+
+  ionViewWillEnter(){
     this.serviceState.mode$.next('allPosterPart') ;
+  }
 
-    this.userId = this.userService.userId ? this.userService.userId : 0 ;
-
-    this.posteService.allUserPublicPoster(this.userId);
-
-    this.posteSub = this.posteService.allUserPoster$.subscribe(
-      (response: any)=>{
-        this.poste = response.message ;
-        this.counter = response.counters;
-      }
-    ) ;
-
-    this.intervalCounter = interval(5000) ;
-
-    this.countersSub = this.intervalCounter.subscribe(
-      ()=>{
-        this.posteService.allUserPublicPoster(this.userId);
-      }
-    );
-
+  ionViewWillLeave(){
+    this.serviceState.mode$.next('currentUserPoster') ;
   }
 
   ngOnDestroy() {
+    this.posteSub.unsubscribe();
     this.countersSub.unsubscribe();
     clearInterval(this.intervalCounter);
-    this.posteSub.unsubscribe();
   }
 
 }

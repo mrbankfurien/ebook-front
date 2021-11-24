@@ -17,7 +17,7 @@ export class RouteGuard implements CanActivate {
         this.auth.isAuth$.subscribe(
           (auth) => {
             if (auth) {
-              this.router.navigate(['/home'])
+              this.router.navigate(['/home']);
             }
             observer.next(true);
           }

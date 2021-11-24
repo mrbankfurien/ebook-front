@@ -3,6 +3,7 @@ import { Component, OnInit, Input  } from '@angular/core';
 import { PublicPosterService } from 'src/app/services/public-post.service';
 import { Router } from '@angular/router';
 import { OtherFunction } from 'src/app/other/toast';
+import { StateService } from './../../services/state.service';
 
 
 @Component({
@@ -24,13 +25,15 @@ export class NotePosteComponent implements OnInit {
   @Input() dislikedNumber: number;
   @Input() commentNumber: number;
   userId: number;
+  part: string;
   public over: boolean;
 
 
   constructor(private postService: PublicPosterService,
     private router: Router,
     private other: OtherFunction,
-    private userService: UserService)
+    private userService: UserService,
+    private serviceState: StateService)
     {
       this.over = false;
       this.userId = this.userService.userId ? this.userService.userId : 0 ;
@@ -97,7 +100,11 @@ export class NotePosteComponent implements OnInit {
   }
 
   ngOnInit() {
-
+    this.serviceState.mode$.subscribe(
+      (part)=>{
+        this.part = part ;
+      }
+    );
   }
 
 }

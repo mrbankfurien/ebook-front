@@ -153,7 +153,7 @@ export class RegisterPage implements OnInit {
       ).catch(
         () => {
           this.formIsValid = false ;
-          this.other.toastCtrl('Erreur d\'origine inconnu , merci de réessayer plutard qssssssss.') ;
+          this.other.toastCtrl('Erreur d\'origine inconnu , merci de réessayer plutard.') ;
         }
       ) ;
     }

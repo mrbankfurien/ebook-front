@@ -3,7 +3,7 @@
     <div class="post-card-header">
       <span class="pseudo">@{{ pseudo }}</span>
       <div class="describle">
-        <span class="post-post-hours"> {{ addDate }} <ion-icon (click)="openOption()" name="ellipsis-horizontal-outline"></ion-icon></span>
+        <span class="post-post-hours"> {{ addDate }} <ion-icon *ngIf="part==='currentUserPoster'" (click)="openOption()" name="ellipsis-horizontal-outline"></ion-icon></span>
       </div>
     </div>
     <div class="post-card-title">{{ title }}</div>

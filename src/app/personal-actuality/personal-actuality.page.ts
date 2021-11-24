@@ -26,30 +26,34 @@ export class PersonalActualityPage implements OnInit  ,  OnDestroy {
     private router: Router,
     private serviceState: StateService) { }
 
-  ngOnInit() {
+    ngOnInit() {
+      this.serviceState.mode$.next('currentUserPoster') ;
+      this.userId = this.userService.userId ? this.userService.userId : 0 ;
+      this.posteService.allPrivatePoster(this.userId);
+      this.posteSub = this.posteService.allPrivatePoster$.subscribe(
+        (response: any)=>{
+          this.poste = response.message ;
+          this.counter = response.counters;
+        }
+      ) ;
+      this.intervalCounter = interval(5000) ;
+      this.countersSub = this.intervalCounter.subscribe(
+        ()=>{
+          this.posteService.allPrivatePoster(this.userId);
+        }
+      );
+      this.userInfo.pseudo = this.userService.userData.pseudonyme ;
+    }
+
+
+  ionViewWillEnter(){
     this.serviceState.mode$.next('currentUserPoster') ;
-    this.userId = this.userService.userId ? this.userService.userId : 0 ;
-
-    this.posteService.allPrivatePoster(this.userId);
-
-    this.posteSub = this.posteService.allPrivatePoster$.subscribe(
-      (response: any)=>{
-        this.poste = response.message ;
-        this.counter = response.counters;
-      }
-    ) ;
-
-    this.intervalCounter = interval(5000) ;
-
-    this.countersSub = this.intervalCounter.subscribe(
-      ()=>{
-        this.posteService.allPrivatePoster(this.userId);
-      }
-    );
-
-    this.userInfo.pseudo = this.userService.userData.pseudonyme ;
-
   }
+
+  ionViewWillLeave(){
+    this.serviceState.mode$.next('allPosterPart') ;
+  }
+
 
   ngOnDestroy() {
     this.countersSub.unsubscribe();
