@@ -4,6 +4,7 @@ import { PosterService } from 'src/app/services/poster.service';
 import { Router } from '@angular/router';
 import { OtherFunction } from 'src/app/other/toast';
 
+
 @Component({
   selector: 'app-note-card',
   templateUrl: './note-card.component.html',
@@ -33,12 +34,11 @@ export class NoteCardComponent implements OnInit {
       (response: any) =>{
         if(response.status)
         {
-          this.router.navigate(['/dashboard']);
+          this.postService.getAllPoste(this.userService.userId);
         }
         else
         {
           this.other.toastCtrl(response.message);
-          this.router.navigate(['/dashboard']);
         }
       }
     ).catch(

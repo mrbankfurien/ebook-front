@@ -4,6 +4,7 @@ import { Subscription } from 'rxjs';
 import { Poster } from '../models/poster.model';
 import { UserService } from '../services/user.service';
 import { Router } from '@angular/router';
+import { User } from '../models/user.model';
 
 @Component({
   selector: 'app-dashboard',
@@ -17,6 +18,7 @@ export class DashboardPage implements OnInit , OnDestroy {
   userId: number ;
   userInfo = {pseudo:''};
   private posteSub: Subscription;
+  private userSub: Subscription;
 
   constructor(private posteService: PosterService,
     private userService: UserService,
@@ -35,7 +37,11 @@ export class DashboardPage implements OnInit , OnDestroy {
       }
     );
 
-    this.userInfo.pseudo = this.userService.userData.pseudonyme ;
+    this.userSub = this.userService.dataUser$.subscribe(
+      (response: any)=>{
+        this.userInfo.pseudo = response.pseudonyme;
+      }
+    );
   }
 
   public navToActu(){
@@ -49,6 +55,7 @@ export class DashboardPage implements OnInit , OnDestroy {
 
   ngOnDestroy() {
     this.posteSub.unsubscribe();
+    this.userSub.unsubscribe();
   }
 
 }

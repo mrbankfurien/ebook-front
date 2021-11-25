@@ -89,7 +89,6 @@ export class PosterService {
 
       this.http.put(links.privatePost.update+id,poste).subscribe(
         (response)=> {
-          this.getAllPoste(this.userId);
           resolve(response);
         } ,
         (error) =>{
@@ -103,7 +102,6 @@ export class PosterService {
     return new Promise((resolve, reject) => {
       this.http.delete(links.privatePost.delete + id).subscribe(
         (response) => {
-          this.getAllPoste(this.userId);
           resolve(response);
         },
         (error) => {

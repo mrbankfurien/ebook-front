@@ -1,10 +1,9 @@
 import { Component, OnInit , OnDestroy } from '@angular/core';
 import { PublicPosterService } from '../services/public-post.service';
-import { Subscription , interval} from 'rxjs';
-import { Poster } from '../models/poster.model';
+import { Subscription } from 'rxjs';
 import { UserService } from '../services/user.service';
-import { Router } from '@angular/router';
 import { StateService } from '../services/state.service';
+import { User } from '../models/user.model';
 
 @Component({
   selector: 'app-personal-actuality',
@@ -17,17 +16,14 @@ export class PersonalActualityPage implements OnInit  ,  OnDestroy {
   public counter: number;
   userId: number ;
   userInfo = {pseudo:''};
-  intervalCounter: any;
-  private countersSub: Subscription ;
+  private userSub: Subscription;
   private posteSub: Subscription;
 
   constructor(private posteService: PublicPosterService,
     private userService: UserService,
-    private router: Router,
     private serviceState: StateService) { }
 
     ngOnInit() {
-      this.serviceState.mode$.next('currentUserPoster') ;
       this.userId = this.userService.userId ? this.userService.userId : 0 ;
       this.posteService.allPrivatePoster(this.userId);
       this.posteSub = this.posteService.allPrivatePoster$.subscribe(
@@ -36,13 +32,11 @@ export class PersonalActualityPage implements OnInit  ,  OnDestroy {
           this.counter = response.counters;
         }
       ) ;
-      this.intervalCounter = interval(5000) ;
-      this.countersSub = this.intervalCounter.subscribe(
-        ()=>{
-          this.posteService.allPrivatePoster(this.userId);
+      this.userSub = this.userService.dataUser$.subscribe(
+        (response: any)=>{
+          this.userInfo.pseudo = response.pseudonyme;
         }
       );
-      this.userInfo.pseudo = this.userService.userData.pseudonyme ;
     }
 
 
@@ -56,9 +50,8 @@ export class PersonalActualityPage implements OnInit  ,  OnDestroy {
 
 
   ngOnDestroy() {
-    this.countersSub.unsubscribe();
-    clearInterval(this.intervalCounter);
     this.posteSub.unsubscribe();
+    this.userSub.unsubscribe();
   }
 
 }

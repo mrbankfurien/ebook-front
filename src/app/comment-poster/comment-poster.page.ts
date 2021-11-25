@@ -36,12 +36,13 @@ export class CommentPosterPage implements OnInit {
       this.serviceState.mode$.subscribe(
         (part: string)=>{
           switch(part) {
-
             case 'allPosterPart':
+              this.posteService.allUserPublicPoster(this.userId);
               this.path.navigate(['/actuality-home/all-user-poste']);
               break;
 
-            case 'currentUserPoster' :
+              case 'currentUserPoster' :
+              this.posteService.allPrivatePoster(this.userId);
               this.path.navigate(['/actuality-home/personal-actuality']);
               break ;
 

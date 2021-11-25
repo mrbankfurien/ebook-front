@@ -1,7 +1,6 @@
 import { Component, OnInit , OnDestroy , ViewChild } from '@angular/core';
 import { PublicPosterService } from '../services/public-post.service';
 import { Subscription } from 'rxjs';
-import { interval } from 'rxjs';
 import { IonSlides } from '@ionic/angular';
 import { UserService } from '../services/user.service';
 
@@ -22,10 +21,8 @@ export class DefaultPage implements OnInit , OnDestroy {
 
   public over: boolean;
   public arrayPoster: any =[];
-  intervalCounter: any;
   public counter: number;
   public userStatus: boolean;
-  private countersSub: Subscription ;
   private publicPosterSub: Subscription ;
   private statusSub: Subscription ;
 
@@ -53,15 +50,6 @@ export class DefaultPage implements OnInit , OnDestroy {
         this.counter = response.counters;
       }
     ) ;
-
-    const counters = interval(5000) ;
-
-    this.countersSub = counters.subscribe(
-      ()=>{
-        this.publicPoster.allPoster();
-      }
-    );
-
     this.statusSub = this.userService.isAuth$.subscribe(
       (value) =>{
         this.userStatus = value;
@@ -78,8 +66,6 @@ export class DefaultPage implements OnInit , OnDestroy {
 
   ngOnDestroy()
   {
-    this.countersSub.unsubscribe();
-    clearInterval(this.intervalCounter);
     this.statusSub.unsubscribe();
     this.publicPosterSub.unsubscribe();
   }

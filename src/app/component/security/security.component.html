@@ -1,0 +1,29 @@
+<div class="overLaySecurity" *ngIf=visibility>
+  <div class="card__over">
+    <div class="header__card"> Paramètre de Securité </div>
+    <div class="card__body">
+      <form>
+        <div class="input__card">
+          <label for="last_passwords"> Ancien mot de passe </label>
+          <input id="last_passwords" type="password" placeholder="**********">
+          <em> Votre ancien mot de passe est incorrect </em>
+        </div>
+        <div class="input__card">
+          <label for="new_passwords"> Entrer le nouveau mot de passe </label>
+          <input id="new_passwords" type="password" placeholder="**********">
+          <em> Votre ancien mot de passe est incorrect </em>
+        </div>
+        <div class="input__card">
+          <label for="conf_passwords"> Confirmer le </label>
+          <input id="conf_passwords" type="password" placeholder="**********">
+          <em> Votre ancien mot de passe est incorrect </em>
+        </div>
+      </form>
+      <div class="btn__send">
+        <div class="card">Valider les modifications</div>
+      </div>
+
+      <div class="closeModal" (click)="closeModal()" >Fermer</div>
+    </div>
+  </div>
+</div>

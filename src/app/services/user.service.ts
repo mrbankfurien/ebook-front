@@ -1,7 +1,7 @@
+import { User } from './../models/user.model';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http' ;
-import { User } from '../models/user.model';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject , Subject } from 'rxjs';
 import { links } from '../link/links';
 
 @Injectable({
@@ -11,14 +11,21 @@ import { links } from '../link/links';
 export class UserService {
 
   isAuth$ = new BehaviorSubject<boolean>(false);
-  userData: any ;
   userId: number ;
   token: string  ;
+  public dataUser$ = new Subject<User[]>();
+  private userData: User[] = [] ;
 
 
 
 
   constructor(private http: HttpClient) {}
+
+  emifDataUser()
+  {
+    this.dataUser$.next(this.userData);
+    console.log(this.userData);
+  }
 
   public createNewUser(user: User){
     return new Promise((resolve , reject) =>{
@@ -46,6 +53,7 @@ export class UserService {
               this.token = response.token;
               this.isAuth$.next(true);
               this.userData = response.data;
+              this.emifDataUser();
               resolve({status : true , msg:'IS_CONNECT'});
             }
             else
@@ -64,6 +72,20 @@ export class UserService {
     return new Promise((resolve , reject)=>{
 
       this.http.post(links.usersLink.reset,{email: mail}).subscribe(
+        (response)=>{
+            resolve(response) ;
+        } ,
+        (error) =>{
+          reject(error);
+        }
+      ) ;
+    }) ;
+  }
+
+  public updateData(user: User){
+    return new Promise((resolve , reject)=>{
+
+      this.http.post(links.usersLink.updateData,user).subscribe(
         (response)=>{
             resolve(response) ;
         } ,

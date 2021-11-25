@@ -22,8 +22,6 @@ export class PublicPosterService {
   public privatePoster: any = [] ;
   public publicUserPoster: any = [] ;
   public commentForPoster: any = [] ;
- // private poste: Poster[] = [] ;
- //private commentPoster: CommentPoster[] = [] ;
 
 
 
@@ -96,7 +94,6 @@ export class PublicPosterService {
 
       this.http.put(links.publicPost.updatePost+id,poste).subscribe(
         (response)=> {
-          this.allPrivatePoster(this.userId);
           resolve(response);
         } ,
         (error) =>{
@@ -149,7 +146,6 @@ export class PublicPosterService {
     return new Promise((resolve, reject) => {
       this.http.delete(links.publicPost.deletePost + id).subscribe(
         (response) => {
-          this.allPrivatePoster(this.userId);
           resolve(response);
         },
         (error) => {

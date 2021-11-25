@@ -70,7 +70,7 @@ export class NotePosteComponent implements OnInit {
       (response: any) =>{
         if(response.status)
         {
-          this.router.navigate(['/actuality-home']);
+          this.postService.allPrivatePoster(this.userService.userId);
         }
         else
         {

@@ -1,0 +1,46 @@
+<div class="container">
+  <div class="content-body">
+    <div class="header">
+      Profil Utilisateur
+    </div>
+    <div class="icon_profil">
+      <div class="img"></div>
+    </div>
+    <div class="card_form">
+      <div class="title">Information Personnelle </div>
+      <div class="body">
+        <form [formGroup]="forms">
+          <div class="input_card">
+            <input formControlName="username" type="text">
+            <em *ngIf="!forms.controls.username.valid"> Ce champ doit être valide</em>
+          </div>
+          <div class="input_card">
+            <input type="text" formControlName="pseudonyme">
+            <em *ngIf="!forms.controls.pseudonyme || !pseudoError.status">{{ pseudoError.msg}}</em>
+          </div>
+          <div class="input_card">
+            <input type="text" formControlName="email">
+            <em *ngIf="!forms.controls.email || !emailError.status">{{ emailError.msg }}</em>
+          </div>
+          <div class="input_card">
+            <input type="text" formControlName="numbers">
+            <em *ngIf="!forms.controls.numbers || !contactError.status">{{ contactError.msg }}</em>
+          </div>
+        </form>
+      </div>
+
+      <div class="btn">
+        <div class="card" (click)="save()">Valider</div>
+      </div>
+    </div>
+
+    <div class="btn__security" (click)="openModal()">
+      <div class="btn"> Modifier votre mot de passe <ion-icon name="lock-closed-outline"></ion-icon></div>
+    </div>
+
+    <div (click)="goBack()" class="btn__float">
+      <ion-icon name="home-outline"></ion-icon>
+    </div>
+    <app-security [visibility]=visibility></app-security>
+  </div>
+</div>

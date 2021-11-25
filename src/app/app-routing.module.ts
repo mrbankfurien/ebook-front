@@ -11,7 +11,7 @@ const routes: Routes = [
   },
   {
     path: '',
-    redirectTo: 'home',
+    redirectTo: 'splash-screen',
     pathMatch: 'full'
   },
   {
@@ -57,6 +57,15 @@ const routes: Routes = [
     path: 'comment-poster/:id',
     loadChildren: () => import('./comment-poster/comment-poster.module').then( m => m.CommentPosterPageModule),
     canActivate:[AuthGuard]
+  },
+  {
+    path: 'profil',
+    loadChildren: () => import('./profil/profil.module').then( m => m.ProfilPageModule),
+    canActivate:[AuthGuard]
+  },
+  {
+    path: 'splash-screen',
+    loadChildren: () => import('./splash-screen/splash-screen.module').then( m => m.SplashScreenPageModule)
   }
 ];
 

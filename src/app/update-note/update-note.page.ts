@@ -96,6 +96,7 @@ export class UpdateNotePage implements OnInit {
           (response: any) =>{
             if(response.status)
             {
+              this.posterService.getAllPoste(this.userService.userId);
               this.route.navigate(['/dashboard']);
             }
             else
@@ -116,6 +117,7 @@ export class UpdateNotePage implements OnInit {
           (response: any) =>{
             if(response.status)
             {
+              this.posterPublicService.allPrivatePoster(this.userService.userId);
               this.route.navigate(['/actuality-home']);
             }
             else

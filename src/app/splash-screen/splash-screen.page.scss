@@ -1,0 +1,39 @@
+.content__card{
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+  .bg{
+    width: 200px;
+    height: 200px;
+    display: flex;
+    justify-content: center;
+    .img{
+      width: 100%;
+      background-size: contain;
+      height: 100%;
+      background-repeat: no-repeat;
+      background-image: url('../../assets/img/community.jpg');
+    }
+  }
+
+  .card_text{
+    width: 100%;
+    text-align: center;
+    position: absolute;
+    bottom: 3rem;
+
+    .card__img{
+      width: 100%;
+      height: 100%;
+
+      img{
+        width: 50px;
+        height: 50px;
+      }
+    }
+  }
+}
