@@ -16,7 +16,6 @@ export class PersonalActualityPage implements OnInit  ,  OnDestroy {
   public counter: number;
   userId: number ;
   userInfo = {pseudo:''};
-  private userSub: Subscription;
   private posteSub: Subscription;
 
   constructor(private posteService: PublicPosterService,
@@ -32,11 +31,8 @@ export class PersonalActualityPage implements OnInit  ,  OnDestroy {
           this.counter = response.counters;
         }
       ) ;
-      this.userSub = this.userService.dataUser$.subscribe(
-        (response: any)=>{
-          this.userInfo.pseudo = response.pseudonyme;
-        }
-      );
+
+      this.userInfo.pseudo = this.userService.userData.pseudonyme ;
     }
 
 
@@ -51,7 +47,6 @@ export class PersonalActualityPage implements OnInit  ,  OnDestroy {
 
   ngOnDestroy() {
     this.posteSub.unsubscribe();
-    this.userSub.unsubscribe();
   }
 
 }

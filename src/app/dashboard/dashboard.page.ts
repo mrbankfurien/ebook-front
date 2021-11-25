@@ -18,7 +18,6 @@ export class DashboardPage implements OnInit , OnDestroy {
   userId: number ;
   userInfo = {pseudo:''};
   private posteSub: Subscription;
-  private userSub: Subscription;
 
   constructor(private posteService: PosterService,
     private userService: UserService,
@@ -37,11 +36,8 @@ export class DashboardPage implements OnInit , OnDestroy {
       }
     );
 
-    this.userSub = this.userService.dataUser$.subscribe(
-      (response: any)=>{
-        this.userInfo.pseudo = response.pseudonyme;
-      }
-    );
+    this.userInfo.pseudo = this.userService.userData.pseudonyme ;
+
   }
 
   public navToActu(){
@@ -55,7 +51,6 @@ export class DashboardPage implements OnInit , OnDestroy {
 
   ngOnDestroy() {
     this.posteSub.unsubscribe();
-    this.userSub.unsubscribe();
   }
 
 }

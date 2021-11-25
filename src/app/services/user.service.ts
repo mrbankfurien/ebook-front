@@ -13,19 +13,13 @@ export class UserService {
   isAuth$ = new BehaviorSubject<boolean>(false);
   userId: number ;
   token: string  ;
-  public dataUser$ = new Subject<User[]>();
-  private userData: User[] = [] ;
+  public userData  ;
 
 
 
 
   constructor(private http: HttpClient) {}
 
-  emifDataUser()
-  {
-    this.dataUser$.next(this.userData);
-    console.log(this.userData);
-  }
 
   public createNewUser(user: User){
     return new Promise((resolve , reject) =>{
@@ -53,7 +47,6 @@ export class UserService {
               this.token = response.token;
               this.isAuth$.next(true);
               this.userData = response.data;
-              this.emifDataUser();
               resolve({status : true , msg:'IS_CONNECT'});
             }
             else
@@ -88,6 +81,7 @@ export class UserService {
       this.http.post(links.usersLink.updateData,user).subscribe(
         (response)=>{
             resolve(response) ;
+            this.userData = user;
         } ,
         (error) =>{
           reject(error);

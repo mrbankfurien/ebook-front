@@ -25,22 +25,24 @@ export class ProfilPage implements OnInit {
       this.visibility = false ;
 
     this.forms = this.builderForm.group({
-      username : ['Boka Agny Ble Romaric',Validators.compose([
+      username : [this.serviceUser.userData.username,Validators.compose([
         Validators.maxLength(200) ,
         Validators.pattern('[a-zA-Z ]*'),
         Validators.required
       ])],
-      email :  ['bankfurienn@gmail.com',Validators.compose([
+      email :  [this.serviceUser.userData.email ,Validators.compose([
         Validators.maxLength(250) ,
         Validators.pattern('^[a-z0-9]+([_|\.|-]{1}[a-z0-9]+)*@[a-z0-9]+([_|\.|-]{1}[a-z0-9]+)*[\.]{1}[a-z]{2,6}$'),
         Validators.required
       ])],
-      pseudonyme :  ['furien',Validators.compose([
+      pseudonyme :  [this.serviceUser.userData.pseudonyme,Validators.compose([
         Validators.maxLength(200) ,
         Validators.pattern('[a-zA-Z ]*'),
         Validators.required
       ])],
-      numbers :  ['002250170810571',Validators.compose([
+      numbers :  [this.serviceUser.userData.number ?
+        this.serviceUser.userData.number :
+        this.serviceUser.userData.numbers,Validators.compose([
         Validators.maxLength(30),
         Validators.required,
       ])],
