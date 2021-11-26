@@ -16,6 +16,7 @@ export class PersonalActualityPage implements OnInit  ,  OnDestroy {
   public counter: number;
   userId: number ;
   userInfo = {pseudo:''};
+  public ready: boolean;
   private posteSub: Subscription;
 
   constructor(private posteService: PublicPosterService,
@@ -23,10 +24,15 @@ export class PersonalActualityPage implements OnInit  ,  OnDestroy {
     private serviceState: StateService) { }
 
     ngOnInit() {
+      this.ready = true ;
       this.userId = this.userService.userId ? this.userService.userId : 0 ;
-      this.posteService.allPrivatePoster(this.userId);
+      setTimeout(()=>{
+        this.posteService.allPrivatePoster(this.userId);
+      },3000);
+
       this.posteSub = this.posteService.allPrivatePoster$.subscribe(
         (response: any)=>{
+          this.ready= false ;
           this.poste = response.message ;
           this.counter = response.counters;
         }

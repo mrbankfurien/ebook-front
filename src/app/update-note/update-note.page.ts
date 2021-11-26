@@ -6,6 +6,7 @@ import { PosterService } from '../services/poster.service';
 import { PublicPosterService } from '../services/public-post.service';
 import { Router ,  ActivatedRoute, Params} from '@angular/router';
 import { UserService } from '../services/user.service';
+import { LoadingController  } from '@ionic/angular';
 
 @Component({
   selector: 'app-update-note',
@@ -24,7 +25,8 @@ export class UpdateNotePage implements OnInit {
     private other: OtherFunction, private posterService: PosterService,
     private route: Router, private userService: UserService,
     private router: ActivatedRoute,
-  private posterPublicService: PublicPosterService) {}
+  private posterPublicService: PublicPosterService,
+  private ctrlLoad: LoadingController) {}
 
 
   public changeVisibility()
@@ -65,13 +67,21 @@ export class UpdateNotePage implements OnInit {
     }
   }
 
-  public savePoster()
+  public async savePoster()
   {
     if(!this.formCreate.valid){
       this.other.toastCtrl('Veuillez renseigner toutes les informations...');
     }
 
     else{
+
+      const load = await this.ctrlLoad.create({
+        spinner: 'bubbles',
+        backdropDismiss: false,
+        message: 'Enregistrement ...' ,
+    }) ;
+
+    await load.present();
 
       const posterClass = new Poster() ;
       posterClass.title = this.formCreate.get('title').value;
@@ -94,6 +104,7 @@ export class UpdateNotePage implements OnInit {
       {
         this.posterService.updatePost(this.pste.id,posterClass).then(
           (response: any) =>{
+            load.dismiss();
             if(response.status)
             {
               this.posterService.getAllPoste(this.userService.userId);
@@ -106,6 +117,7 @@ export class UpdateNotePage implements OnInit {
           }
         ).catch(
           () =>{
+            load.dismiss();
             this.other.toastCtrl('Une erreur s\'est produite, réessayer plutard .');
           }
         );
@@ -115,6 +127,7 @@ export class UpdateNotePage implements OnInit {
       {
         this.posterPublicService.updatePost(this.pste.id,posterClass).then(
           (response: any) =>{
+            load.dismiss();
             if(response.status)
             {
               this.posterPublicService.allPrivatePoster(this.userService.userId);
@@ -127,6 +140,7 @@ export class UpdateNotePage implements OnInit {
           }
         ).catch(
           () =>{
+            load.dismiss();
             this.other.toastCtrl('Une erreur s\'est produite, réessayer plutard .');
           }
         );
@@ -134,24 +148,21 @@ export class UpdateNotePage implements OnInit {
     }
   }
 
-  ngOnInit() {
+  public async initUpdate()
+  {
+      const load = await this.ctrlLoad.create({
+        spinner: 'bubbles',
+        backdropDismiss: false,
+        message: 'Chargement...' ,
+    }) ;
 
-    this.formCreate = this.builderFrom.group({
-      title : ['' , Validators.compose([
-        Validators.required
-      ])] ,
-      content : ['' , Validators.compose([
-        Validators.required
-      ])] ,
-      visibility : ['Privé' , Validators.compose([
-        Validators.required
-      ])] ,
-    });
+    await load.present();
 
     this.router.params.subscribe(
       (params: Params) =>{
         this.posterService.getOnPoste(params.id).then(
           (poste: Poster)=>{
+            load.dismiss();
             this.pste = poste;
             this.formCreate.get('title').setValue(this.pste.title);
             this.formCreate.get('content').setValue(this.pste.msg);
@@ -181,8 +192,22 @@ export class UpdateNotePage implements OnInit {
         );
       }
     ) ;
+  }
 
+  ngOnInit() {
 
+    this.formCreate = this.builderFrom.group({
+      title : ['' , Validators.compose([
+        Validators.required
+      ])] ,
+      content : ['' , Validators.compose([
+        Validators.required
+      ])] ,
+      visibility : ['Privé' , Validators.compose([
+        Validators.required
+      ])] ,
+    });
+    this.initUpdate();
   }
 
 }

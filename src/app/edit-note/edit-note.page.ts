@@ -118,6 +118,7 @@ export class EditNotePage implements OnInit {
                 this.route.navigate(['/actuality-home']);
                 break;
                 case 'Privé':
+                  this.posterService.getAllPoste(this.userService.userId);
                   this.route.navigate(['/dashboard']);
                   break;
 

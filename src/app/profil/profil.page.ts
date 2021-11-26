@@ -17,12 +17,14 @@ export class ProfilPage implements OnInit {
   public pseudoError= {status: true, msg: 'Ce champs doit être valide ...'} ;
   public contactError= {status: true, msg: 'Ce champs doit être valide ...'};
   public visibility: boolean;
+  public isValidate: boolean ;
 
   constructor(private builderForm: FormBuilder,private other: OtherFunction,
     private serviceUser: UserService,
     private route: Router) {
 
       this.visibility = false ;
+      this.isValidate = false ;
 
     this.forms = this.builderForm.group({
       username : [this.serviceUser.userData.username,Validators.compose([
@@ -62,7 +64,9 @@ export class ProfilPage implements OnInit {
 
    save()
    {
+     this.isValidate = true ;
      if(!this.forms.valid){
+       this.isValidate = false ;
       this.other.toastCtrl('Veuillé renseigner toutes vos informations .');
      }
      else{
@@ -81,6 +85,8 @@ export class ProfilPage implements OnInit {
 
         this.serviceUser.updateData(userModel).then(
           (response: any)=>{
+
+            this.isValidate = false ;
             if(response.status)
             {
               this.emailError = {status: true, msg: 'Ce champs doit être valide ...'} ;
@@ -103,7 +109,8 @@ export class ProfilPage implements OnInit {
             }
           }
         ).catch(
-          (error)=>{
+          ()=>{
+            this.isValidate = false ;
             this.other.toastCtrl('Erreur d\'origine inconnu , merci de réessayer plutard.') ;
             this.route.navigate(['/dashboard']);
           }

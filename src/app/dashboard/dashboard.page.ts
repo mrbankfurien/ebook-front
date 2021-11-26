@@ -17,20 +17,25 @@ export class DashboardPage implements OnInit , OnDestroy {
   public counter: number;
   userId: number ;
   userInfo = {pseudo:''};
+  ready: boolean;
   private posteSub: Subscription;
 
   constructor(private posteService: PosterService,
     private userService: UserService,
-    private router: Router) { }
+    private router: Router) {}
 
   ngOnInit() {
 
+    this.ready = true ;
     this.userId = this.userService.userId ? this.userService.userId : 0 ;
 
-    this.posteService.getAllPoste(this.userId);
+    setTimeout(()=>{
+      this.posteService.getAllPoste(this.userId);
+    },5000);
 
     this.posteSub = this.posteService.postes$.subscribe(
       (pstes: any)=>{
+        this.ready = false ;
         this.poste = pstes.message;
         this.counter = pstes.counters;
       }

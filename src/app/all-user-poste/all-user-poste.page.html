@@ -11,6 +11,10 @@
       Aucune information disponible pour l'instant ...
     </div>
 
+    <div *ngIf=ready class="card-info">
+      Chargement des données ...
+    </div>
+
     <app-note-poste
    *ngFor='let item of poste'
    [pseudo]=item.pseudonyme

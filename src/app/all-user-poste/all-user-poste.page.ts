@@ -15,6 +15,7 @@ export class AllUserPostePage implements OnInit  ,  OnDestroy{
   public poste: any = [];
   public counter: number;
   userId: number ;
+  public ready: boolean;
   private posteSub: Subscription;
 
   constructor(private posteService: PublicPosterService,
@@ -24,11 +25,16 @@ export class AllUserPostePage implements OnInit  ,  OnDestroy{
 
 
     ngOnInit() {
+      this.ready = true ;
       this.serviceState.mode$.next('allPosterPart') ;
       this.userId = this.userService.userId ? this.userService.userId : 0 ;
-      this.posteService.allUserPublicPoster(this.userId);
+      setTimeout(()=>{
+        this.posteService.allUserPublicPoster(this.userId);
+      },3000);
+
       this.posteSub = this.posteService.allUserPoster$.subscribe(
         (response: any)=>{
+          this.ready = false ;
           this.poste = response.message ;
           this.counter = response.counters;
         }

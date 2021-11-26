@@ -4,6 +4,7 @@ import { PublicPosterService } from 'src/app/services/public-post.service';
 import { Router } from '@angular/router';
 import { OtherFunction } from 'src/app/other/toast';
 import { StateService } from './../../services/state.service';
+import { LoadingController  } from '@ionic/angular';
 
 
 @Component({
@@ -33,7 +34,8 @@ export class NotePosteComponent implements OnInit {
     private router: Router,
     private other: OtherFunction,
     private userService: UserService,
-    private serviceState: StateService)
+    private serviceState: StateService,
+    private ctrlLoad: LoadingController)
     {
       this.over = false;
       this.userId = this.userService.userId ? this.userService.userId : 0 ;
@@ -64,10 +66,20 @@ export class NotePosteComponent implements OnInit {
     ) ;
   }
 
-  public deleted()
+  public async deleted()
   {
+
+    const load = await this.ctrlLoad.create({
+      spinner: 'bubbles',
+      backdropDismiss: false,
+      message: 'Suppression ...' ,
+  }) ;
+
+  await load.present();
+
     this.postService.deletedPost(this.idPoste).then(
       (response: any) =>{
+        load.dismiss();
         if(response.status)
         {
           this.postService.allPrivatePoster(this.userService.userId);
@@ -80,6 +92,7 @@ export class NotePosteComponent implements OnInit {
       }
     ).catch(
       ()=>{
+        load.dismiss();
           this.userService.isAuth$.next(false);
           this.userService.userId = 0;
           this.userService.token = 'DEFAULT_USER_EBOOK';

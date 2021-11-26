@@ -41,13 +41,31 @@
 
       .btn__send{
         width: 100%;
-        padding:1rem;
         text-align: center;
+        background-color: #f1f2f3;
 
-        .card{
-          padding:.2rem;
-          background-color: rgb(216, 216, 216);
+        .img{
+          position: relative;
+          width: 100%;
+          height: 50px;
+
+          img{
+            position: relative;
+            width: 100%;
+            height: 100%;
+          }
         }
+
+          button
+          {
+            position: relative;
+            width: 100%;
+            height: 50px;
+            border-radius: 5px;
+            background-color: orange;
+            color: white;
+          }
+
       }
 
       .input__card{
@@ -55,6 +73,11 @@
         display: flex;
         flex-direction: column;
         margin-bottom: 1rem;
+
+        em{
+          color: red;
+          font-weight: bolder;
+        }
 
         input
         {

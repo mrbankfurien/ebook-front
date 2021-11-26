@@ -77,11 +77,23 @@ export class UserService {
 
   public updateData(user: User){
     return new Promise((resolve , reject)=>{
-
       this.http.post(links.usersLink.updateData,user).subscribe(
         (response)=>{
             resolve(response) ;
             this.userData = user;
+        } ,
+        (error) =>{
+          reject(error);
+        }
+      ) ;
+    }) ;
+  }
+
+  public updatePassword(token,data){
+    return new Promise((resolve , reject)=>{
+      this.http.put(links.usersLink.updatePassword+token,data).subscribe(
+        (response)=>{
+            resolve(response) ;
         } ,
         (error) =>{
           reject(error);

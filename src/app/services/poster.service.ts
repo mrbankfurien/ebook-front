@@ -59,7 +59,6 @@ export class PosterService {
     return new Promise((resolve,reject)=>{
       this.http.post(links.privatePost.create,poste).subscribe(
         (response)=>{
-          this.getAllPoste(this.userId);
           resolve(response);
         } ,
         (error)=>{

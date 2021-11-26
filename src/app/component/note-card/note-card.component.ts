@@ -3,6 +3,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { PosterService } from 'src/app/services/poster.service';
 import { Router } from '@angular/router';
 import { OtherFunction } from 'src/app/other/toast';
+import { LoadingController  } from '@ionic/angular';
 
 
 @Component({
@@ -24,17 +25,29 @@ export class NoteCardComponent implements OnInit {
   constructor(private postService: PosterService,
     private router: Router,
     private other: OtherFunction,
-    private userService: UserService) { }
+    private userService: UserService,
+    private ctrlLoad: LoadingController) { }
 
   ngOnInit() {}
 
-  public deleted()
+  public async deleted()
   {
+    const load = await this.ctrlLoad.create({
+      spinner: 'bubbles',
+      backdropDismiss: false,
+      message: 'Suppression ...' ,
+  }) ;
+
+  await load.present();
+
     this.postService.deletedPost(this.idPoste).then(
       (response: any) =>{
+        load.dismiss();
         if(response.status)
         {
-          this.postService.getAllPoste(this.userService.userId);
+          setTimeout(()=>{
+            this.postService.getAllPoste(this.userService.userId);
+          },3000) ;
         }
         else
         {
@@ -43,6 +56,7 @@ export class NoteCardComponent implements OnInit {
       }
     ).catch(
       ()=>{
+        load.dismiss();
           this.userService.isAuth$.next(false);
           this.userService.userId = 0;
           this.userService.token = 'DEFAULT_USER_EBOOK';
