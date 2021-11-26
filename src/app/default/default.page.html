@@ -24,6 +24,9 @@
     <div *ngIf="counter===0" class="card-info">
       Aucune information disponible pour l'instant ...
     </div>
+    <div *ngIf=ready class="card-info">
+      Chargement des données ...
+    </div>
 
     <div class="card-list">
       <div *ngFor="let item of arrayPoster" class="post-card">

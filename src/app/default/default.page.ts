@@ -23,6 +23,7 @@ export class DefaultPage implements OnInit , OnDestroy {
   public arrayPoster: any =[];
   public counter: number;
   public userStatus: boolean;
+  public ready: boolean;
   private publicPosterSub: Subscription ;
   private statusSub: Subscription ;
 
@@ -42,10 +43,12 @@ export class DefaultPage implements OnInit , OnDestroy {
   }
 
   ngOnInit() {
+    this.ready = true ;
     this.publicPoster.allPoster();
 
     this.publicPosterSub = this.publicPoster.allPublicPoster$.subscribe(
       (response: any) => {
+        this.ready = false ;
         this.arrayPoster = response.message ;
         this.counter = response.counters;
       }

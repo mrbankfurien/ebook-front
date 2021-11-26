@@ -4,7 +4,7 @@ import { Subscription } from 'rxjs';
 import { Poster } from '../models/poster.model';
 import { UserService } from '../services/user.service';
 import { Router } from '@angular/router';
-import { User } from '../models/user.model';
+import {Storage} from '@ionic/storage-angular';
 
 @Component({
   selector: 'app-dashboard',
@@ -16,13 +16,16 @@ export class DashboardPage implements OnInit , OnDestroy {
   public poste: Poster[] = [];
   public counter: number;
   userId: number ;
-  userInfo = {pseudo:''};
+  userInfo = {pseudo:'',date:''};
   ready: boolean;
   private posteSub: Subscription;
 
   constructor(private posteService: PosterService,
     private userService: UserService,
-    private router: Router) {}
+    private router: Router,
+    private storage: Storage) {
+      this.storage.create();
+    }
 
   ngOnInit() {
 
@@ -41,7 +44,11 @@ export class DashboardPage implements OnInit , OnDestroy {
       }
     );
 
-    this.userInfo.pseudo = this.userService.userData.pseudonyme ;
+    this.storage.get('mylife_init').then(
+      (val)=>{
+        this.userInfo = {pseudo:val.pseudo , date : val.date};
+      }
+    );
 
   }
 

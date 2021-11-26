@@ -10,11 +10,13 @@ import { AppRoutingModule } from './app-routing.module';
 import { OtherFunction } from './other/toast';
 import { AuthInterceptor } from './interceptors/auth-interceptors';
 
+import {Storage} from '@ionic/storage-angular';
+
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
   imports: [BrowserModule,HttpClientModule , IonicModule.forRoot(), AppRoutingModule],
-  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy } ,
+  providers: [Storage,{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy } ,
     {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true} ,OtherFunction],
   bootstrap: [AppComponent],
 })

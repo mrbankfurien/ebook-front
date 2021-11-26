@@ -4,6 +4,8 @@ import { UserService } from '../services/user.service';
 import { OtherFunction } from '../other/toast';
 import { Router } from '@angular/router';
 
+import {Storage} from '@ionic/storage-angular';
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
@@ -18,7 +20,8 @@ export class LoginPage implements OnInit {
   public formIsValid: boolean;
   public register =  {status: false, msg: '...'};
 
-  constructor(private router: Router , private formBuilder: FormBuilder, private userService: UserService,private other: OtherFunction) {
+  constructor(private router: Router , private formBuilder: FormBuilder, private userService: UserService,private other: OtherFunction,
+    private storage: Storage) {
 
     this.formIsValid = false ;
 

@@ -3,7 +3,7 @@ import { PublicPosterService } from '../services/public-post.service';
 import { Subscription } from 'rxjs';
 import { UserService } from '../services/user.service';
 import { StateService } from '../services/state.service';
-import { User } from '../models/user.model';
+import {Storage} from '@ionic/storage-angular';
 
 @Component({
   selector: 'app-personal-actuality',
@@ -21,7 +21,10 @@ export class PersonalActualityPage implements OnInit  ,  OnDestroy {
 
   constructor(private posteService: PublicPosterService,
     private userService: UserService,
-    private serviceState: StateService) { }
+    private serviceState: StateService,
+    private storage: Storage) {
+      this.storage.create();
+     }
 
     ngOnInit() {
       this.ready = true ;
@@ -38,7 +41,11 @@ export class PersonalActualityPage implements OnInit  ,  OnDestroy {
         }
       ) ;
 
-      this.userInfo.pseudo = this.userService.userData.pseudonyme ;
+      this.storage.get('mylife_init').then(
+        (val)=>{
+          this.userInfo = {pseudo:val.pseudo};
+        }
+      );
     }
 
 

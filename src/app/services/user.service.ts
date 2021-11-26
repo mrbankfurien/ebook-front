@@ -1,8 +1,9 @@
 import { User } from './../models/user.model';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http' ;
-import { BehaviorSubject , Subject } from 'rxjs';
+import { BehaviorSubject  } from 'rxjs';
 import { links } from '../link/links';
+import {Storage} from '@ionic/storage-angular';
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +19,9 @@ export class UserService {
 
 
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient,private storage: Storage) {
+    this.storage.create();
+  }
 
 
   public createNewUser(user: User){
@@ -27,6 +30,12 @@ export class UserService {
       subscribe(
         (response) =>{
           resolve(response) ;
+          this.storage.set(
+            'mylife_init',{status:{register:true,login:false},
+            email:user.email,
+            passwords:user.passwords,
+            pseudo:user.pseudonyme}
+            );
         } ,
         (error) =>{
           reject(error) ;
@@ -47,6 +56,13 @@ export class UserService {
               this.token = response.token;
               this.isAuth$.next(true);
               this.userData = response.data;
+              this.storage.set(
+                'mylife_init',{status:{register:true,login:true},
+                email:mail,
+                passwords:password,
+                pseudo:this.userData.pseudonyme,
+                date:this.userData.add_date}
+                );
               resolve({status : true , msg:'IS_CONNECT'});
             }
             else
@@ -107,6 +123,13 @@ export class UserService {
     this.isAuth$.next(false);
     this.userId = 0;
     this.token = 'DEFAULT_USER_EBOOK';
+    this.storage.set(
+      'mylife_init',{status:{register:true,login:false},
+      email:this.userData.email,
+      passwords:'',
+      pseudo:this.userData.pseudonyme,
+      date:this.userData.add_date}
+      );
   }
 
 }
