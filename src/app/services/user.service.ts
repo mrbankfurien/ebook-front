@@ -14,10 +14,9 @@ export class UserService {
   isAuth$ = new BehaviorSubject<boolean>(false);
   userId: number ;
   token: string  ;
-  public userData  ;
-
-
-
+  public userPassword: any ;
+  public userData: any  ;
+  public registerDate: any ;
 
   constructor(private http: HttpClient,private storage: Storage) {
     this.storage.create();
@@ -29,12 +28,15 @@ export class UserService {
       this.http.post(links.usersLink.register,user).
       subscribe(
         (response) =>{
+          this.userPassword = user.passwords ;
           resolve(response) ;
           this.storage.set(
             'mylife_init',{status:{register:true,login:false},
             email:user.email,
-            passwords:user.passwords,
-            pseudo:user.pseudonyme}
+            userName:user.username,
+            passwords:this.userPassword,
+            pseudo:user.pseudonyme,
+            numbers:user.numbers}
             );
         } ,
         (error) =>{
@@ -54,14 +56,18 @@ export class UserService {
             {
               this.userId = response.userId;
               this.token = response.token;
+              this.userPassword = password ;
               this.isAuth$.next(true);
               this.userData = response.data;
+              this.registerDate = this.userData.add_date ;
               this.storage.set(
                 'mylife_init',{status:{register:true,login:true},
                 email:mail,
-                passwords:password,
+                userName:this.userData.username,
+                passwords:this.userPassword,
                 pseudo:this.userData.pseudonyme,
-                date:this.userData.add_date}
+                date:this.registerDate,
+                numbers:this.userData.number}
                 );
               resolve({status : true , msg:'IS_CONNECT'});
             }
@@ -95,8 +101,8 @@ export class UserService {
     return new Promise((resolve , reject)=>{
       this.http.post(links.usersLink.updateData,user).subscribe(
         (response)=>{
+            this.userData = user ;
             resolve(response) ;
-            this.userData = user;
         } ,
         (error) =>{
           reject(error);
@@ -126,9 +132,11 @@ export class UserService {
     this.storage.set(
       'mylife_init',{status:{register:true,login:false},
       email:this.userData.email,
+      userName:this.userData.username,
       passwords:'',
+      numbers:this.userData.number,
       pseudo:this.userData.pseudonyme,
-      date:this.userData.add_date}
+      date:this.registerDate}
       );
   }
 

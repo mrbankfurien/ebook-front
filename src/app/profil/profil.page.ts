@@ -4,6 +4,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { OtherFunction } from '../other/toast';
 import { Router } from '@angular/router';
+import {Storage} from '@ionic/storage-angular';
 
 @Component({
   selector: 'app-profil',
@@ -21,8 +22,9 @@ export class ProfilPage implements OnInit {
 
   constructor(private builderForm: FormBuilder,private other: OtherFunction,
     private serviceUser: UserService,
-    private route: Router) {
-
+    private route: Router,
+    private storage: Storage) {
+      this.storage.create();
       this.visibility = false ;
       this.isValidate = false ;
 
@@ -92,7 +94,18 @@ export class ProfilPage implements OnInit {
               this.emailError = {status: true, msg: 'Ce champs doit être valide ...'} ;
               this.contactError = {status: true, msg: 'Ce champs doit être valide ...'} ;
               this.pseudoError = {status: true, msg: 'Ce champs doit être valide ...'} ;
-            }
+
+              this.storage.set(
+                'mylife_init',{status:{register:true,login:true},
+                email:this.forms.get('email').value,
+                passwords:this.serviceUser.userPassword,
+                userName:this.forms.get('username').value ,
+                pseudo:this.forms.get('pseudonyme').value,
+                numbers:this.forms.get('numbers').value,
+                date:this.serviceUser.registerDate}
+                );
+
+              }
             else
             {
               switch (response.error) {

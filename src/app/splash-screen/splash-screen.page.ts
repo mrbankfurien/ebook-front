@@ -1,3 +1,4 @@
+import { OtherFunction } from './../other/toast';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import {Storage} from '@ionic/storage-angular';
@@ -12,7 +13,8 @@ export class SplashScreenPage implements OnInit {
 
   constructor(private route: Router,
     private storage: Storage,
-    private serviceUser: UserService) {this.storage.create(); }
+    private serviceUser: UserService,
+    private other: OtherFunction) {this.storage.create(); }
 
   ngOnInit() {
 
@@ -32,6 +34,10 @@ export class SplashScreenPage implements OnInit {
               }else{
                 this.route.navigate(['/login']);
               }
+            }
+          ).catch(
+            ()=>{
+              this.other.toastCtrl('Veuillé verifier votre connection internet, puis réessayé .');
             }
           );
         }

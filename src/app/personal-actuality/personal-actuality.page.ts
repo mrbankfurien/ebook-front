@@ -40,16 +40,15 @@ export class PersonalActualityPage implements OnInit  ,  OnDestroy {
           this.counter = response.counters;
         }
       ) ;
-
-      this.storage.get('mylife_init').then(
-        (val)=>{
-          this.userInfo = {pseudo:val.pseudo};
-        }
-      );
     }
 
 
   ionViewWillEnter(){
+    this.storage.get('mylife_init').then(
+      (val)=>{
+        this.userInfo = {pseudo:val.pseudo};
+      }
+    );
     this.serviceState.mode$.next('currentUserPoster') ;
   }
 

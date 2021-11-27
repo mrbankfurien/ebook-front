@@ -47,7 +47,7 @@ export class NoteCardComponent implements OnInit {
         {
           setTimeout(()=>{
             this.postService.getAllPoste(this.userService.userId);
-          },3000) ;
+          },5000) ;
         }
         else
         {

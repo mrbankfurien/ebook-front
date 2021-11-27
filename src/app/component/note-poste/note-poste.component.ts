@@ -82,7 +82,9 @@ export class NotePosteComponent implements OnInit {
         load.dismiss();
         if(response.status)
         {
-          this.postService.allPrivatePoster(this.userService.userId);
+          setTimeout(()=>{
+            this.postService.allPrivatePoster(this.userService.userId);
+          },5000);
         }
         else
         {

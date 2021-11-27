@@ -44,12 +44,14 @@ export class DashboardPage implements OnInit , OnDestroy {
       }
     );
 
+  }
+
+  ionViewWillEnter(){
     this.storage.get('mylife_init').then(
       (val)=>{
         this.userInfo = {pseudo:val.pseudo , date : val.date};
       }
     );
-
   }
 
   public navToActu(){
