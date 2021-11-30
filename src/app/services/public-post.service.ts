@@ -92,7 +92,7 @@ export class PublicPosterService {
   {
     return new Promise((resolve,reject)=>{
 
-      this.http.put(links.publicPost.updatePost+id,poste).subscribe(
+      this.http.put(links.allLink.update+id,poste).subscribe(
         (response)=> {
           resolve(response);
         } ,
@@ -144,7 +144,7 @@ export class PublicPosterService {
 
   public deletedPost(id: number) {
     return new Promise((resolve, reject) => {
-      this.http.delete(links.publicPost.deletePost + id).subscribe(
+      this.http.delete(links.allLink.delete + id).subscribe(
         (response) => {
           resolve(response);
         },

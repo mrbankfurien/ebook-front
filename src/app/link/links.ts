@@ -11,26 +11,25 @@ export const links = {
     updateData:'https://banks-furienn-app.herokuapp.com/api/user/update-data',
     updatePassword:'https://banks-furienn-app.herokuapp.com/api/user/update-password/'
   } ,
-
   publicPost :
   {
     commented:'https://banks-furienn-app.herokuapp.com/api/public-poster/comment-poster/',
     allComment:'https://banks-furienn-app.herokuapp.com/api/public-poster/current-comment-poste/',
     lovePost:'https://banks-furienn-app.herokuapp.com/api/public-poster/loved-poster/',
-    updatePost:'https://banks-furienn-app.herokuapp.com/api/poster/update-post/',
     allPost:'https://banks-furienn-app.herokuapp.com/api/public-poster/all-poster/',
     publicPost:'https://banks-furienn-app.herokuapp.com/api/public-poster/members-poster/',
     privatePost:'https://banks-furienn-app.herokuapp.com/api/public-poster/user-poster/',
-    deletePost:'https://banks-furienn-app.herokuapp.com/api/poster/deleted/'
   } ,
-
   privatePost :
   {
     post : 'https://banks-furienn-app.herokuapp.com/api/poster/all-post/',
     create:'https://banks-furienn-app.herokuapp.com/api/poster/save-post',
     onPost:'https://banks-furienn-app.herokuapp.com/api/poster/getOnPost/',
+  } ,
+  allLink:
+  {
+    delete : 'https://banks-furienn-app.herokuapp.com/api/poster/deleted/',
     update:'https://banks-furienn-app.herokuapp.com/api/poster/update-post/',
-    delete:'https://banks-furienn-app.herokuapp.com/api/poster/deleted/'
   }
 };
 

@@ -11,7 +11,7 @@ export class OtherFunction {
   constructor(private ctrlToast: ToastController,
   private ctrlLoad: LoadingController){}
 
-  public async toastCtrl(title)
+  public async toastCtrl(title: string)
   {
     const toast = await this.ctrlToast.create({
       message: title,
@@ -31,9 +31,9 @@ export class OtherFunction {
     await toast.present() ;
   }
 
-  public async loadCtrl(title)
+  public async loadCtrl(title: string)
   {
-    const load = await this.ctrlLoad.create({ 
+    const load = await this.ctrlLoad.create({
         spinner: 'bubbles',
         backdropDismiss: true,
         message: title ,
