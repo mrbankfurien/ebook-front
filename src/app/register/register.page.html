@@ -3,7 +3,7 @@
 
     <div class="title">
       <h5>
-        Bienvenue sur Mylife , votre blog note personnalisé .
+        Bienvenue sur Mylife , votre bloc note personnalisé .
       </h5>
     </div>
 
@@ -16,78 +16,36 @@
       Pour demarer avec ebook , rien de plus simple que de renseigner les differentes informations demandées .
     </em>
 
-      <ion-slides #signupSlider>
-
-        <ion-slide>
-          <div class="card-form">
-            <form [formGroup]="slideOneForm">
-              <div class="input-card">
-                <label for="username"> Nom & Prenom * </label>
-                <input formControlName="username" id="username" type="text" placeholder="Boka Agny Ble Romaric Rocephin">
-                <em *ngIf="!slideOneForm.controls.username.valid"> Ce champs est requis ...</em>
-              </div>
-              <div class="input-card">
-                <label for="email"> Email * </label>
-                <input formControlName="email" id="email" type="email" placeholder="bankfurienn@gmail.com">
-                <em *ngIf="!slideOneForm.controls.email.valid || !emailError.status"> {{ emailError.msg }} </em>
-              </div>
-              <div class="input-card">
-                <label for="number"> Contact * </label>
-                <input formControlName="phone" id="number" type="text" placeholder="002250170810571">
-                <em *ngIf="!slideOneForm.controls.phone.valid ||  !contactError.status "> {{ contactError.msg }}</em>
-              </div>
-            </form>
-
-            <div (click)="next()" class="next">
-              <span>Suivant</span>
-              <ion-icon name="arrow-forward-outline"></ion-icon>
-            </div>
-
-            <div [routerLink]="['/login']" class="login-account">
-              <span>Vous avez déjà un compte ?</span>
-            </div>
+    <div class="register__form"> 
+      <div class="card-form">
+        <form [formGroup]="slideOneForm">
+          <div class="input-card">
+            <label for="username"> Definissez un Pseudonyme ( Surnom ) * </label>
+            <input formControlName="pseudonyme" id="pseudonyme" type="text" placeholder="Banks Furienn">
+            <em *ngIf="!slideOneForm.controls.pseudonyme.valid || !pseudoError.status"> {{ pseudoError.msg }}</em>
           </div>
-        </ion-slide>
-
-        <ion-slide>
-          <div class="card-form">
-            <form [formGroup]="slideTwoForm">
-              <div class="input-card">
-                <label for="pseudonyme"> Pseudonyme ( Surnom ) * </label>
-                <input formControlName="pseudonyme" id="pseudonyme" type="text" placeholder="banks furienn">
-                <em *ngIf="!slideTwoForm.controls.pseudonyme.valid || !pseudoError.status"> {{ pseudoError.msg }}</em>
-              </div>
-              <div class="input-card">
-                <label for="gender"> Genre * </label>
-                <ion-item>
-                  <ion-label><span>cliquer pour modifier</span></ion-label>
-                  <ion-select  formControlName="gender" name="gender" interface="popover">
-                    <ion-select-option value="Masculin">Masculin</ion-select-option>
-                    <ion-select-option value="Femin">Femin</ion-select-option>
-                  </ion-select>
-                </ion-item>
-                <em *ngIf="!slideTwoForm.controls.gender.valid"> Ce champs est requis ... </em>
-              </div>
-              <div class="input-card">
-                <label for="password"> Mot de passe * </label>
-                <input formControlName="passwords" id="password" type="password" placeholder="**********">
-                <em *ngIf="!slideTwoForm.controls.passwords.valid"> Ce champs est requis ... </em>
-              </div>
-            </form>
-
-            <div (click)="prev()" class="prev">
-              <ion-icon name="arrow-back-outline"></ion-icon>
-              <span>Précedant</span>
-            </div>
-
-            <div (click)="saveUser()" class="register-btn">
-              <ion-icon name="checkmark-done-outline"></ion-icon>
-              <span> Valider l'inscription </span>
-            </div>
+          <div class="input-card">
+            <label for="email"> Email * </label>
+            <input formControlName="email" id="email" type="email" placeholder="bankfurienn@gmail.com">
+            <em *ngIf="!slideOneForm.controls.email.valid || !emailError.status"> {{ emailError.msg }} </em>
           </div>
-        </ion-slide>
+          <div class="input-card">
+            <label for="number"> Mot de passe * </label>
+            <input formControlName="passwords" id="passwords" type="password" placeholder="**********">
+            <em *ngIf="!slideOneForm.controls.passwords.valid"> Ce champs doit être valide ... </em>
+          </div>
+        </form>
 
-      </ion-slides>
+        <div (click)="saveUser()" class="register-btn">
+          <ion-icon name="checkmark-done-outline"></ion-icon>
+          <span> Valider l'inscription </span>
+        </div>
+
+        <div [routerLink]="['/login']" class="login-account">
+          <span>Vous avez déjà un compte ?</span>
+        </div>
+      </div>
+    </div>
 
       <app-overlay [status]=formIsValid content="Verification des informations en cours ..."></app-overlay>
 
